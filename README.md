@@ -1,20 +1,32 @@
 # CS 100 RShell
 Fall 2019
 
-Sergio Inzunza, 86xxxxxxx, sinzu003@ucr.edu
+Sergio Inzunza, 862187623, sinzu003@ucr.edu
 
 Garrett Pedvin, 862085838, gpedv002@ucr.edu
 
 ### Introduction
-- What will we accomplish with this project?
-- What design patterns will be used?
-- How are inputs ingested, transformed, and processed?
+This program is a command shell which is able to Print a command prompt (e.g. `$`). Read in a line of command(s) (and connector(s)) from standard input. And execute the appropriate 
+commands using fork , execvp , and waitpid Commands. We are using the composite pattern design for representing the commands and connecters. The inputs are ingested through the getline() function and then through iteration of the the string inputs are seperated and transformed into objects for each command. Those objects contain an execute() function which will run depending on the connector to it's left and, depending on that, the command to the left.
 
 ### Diagram
-[Lucidchart will help.](https://www.lucidchart.com/pages/)
+![alt text](https://github.com/cs100/assignment-sigp/blob/master/images/OMT%20Diagram.jpeg)
 
 ### Classes
-Describe each class.
+We have a group of classes in the form of the composite pattern.
+
+base class - Is an abstract class. It has a pure virtual void execute() function. 
+
+indConnector class - A sub-class of base. It is a leaf. It is used for objects of the first command or commands that have the ; connecter to the left. 
+This class has no additional members. 
+
+andConnector class - A sub-class of base. It has a base pointer object as a private member. This is therefore a composite. This class is used to create objects of commands that have 
+the && connector to the left. The object it takes in is the object of the command to it's left. In the execute function it checks if the object it is passed in has executed. 
+If so it executes.
+
+orConnector class - A sub-class of base. It has a base pointer object as a private member. This is therefore a composite. This class is used to create objects of commands that have 
+the || connector to the left. The object it takes in is the object of the command to it's left. In the execute function it checks if the object it is passed in has not executed. 
+If not it executes.
 
 ### Prototypes/Research
 Test the **waitpid()**, **execvp()**, and **fork()** functions. How?
