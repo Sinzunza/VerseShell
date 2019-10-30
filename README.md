@@ -10,7 +10,7 @@ This program is a command shell which is able to Print a command prompt (e.g. `$
 commands using fork , execvp , and waitpid Commands. We are using the composite pattern design for representing the commands and connecters. The inputs are ingested through the getline() function and then through iteration of the the string inputs are seperated and transformed into objects for each command. Those objects contain an execute() function which will run depending on the connector to it's left and, depending on that, the command to the left.
 
 ### Diagram
-![alt text](https://github.com/cs100/assignment-sigp/blob/master/images/OMT%20Diagram.jpeg)
+![alternative text](https://github.com/cs100/assignment-sigp/blob/master/images/OMT%20Diagram.jpeg)
 
 ### Classes
 We have a group of classes in the form of the composite pattern.
