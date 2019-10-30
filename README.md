@@ -37,23 +37,21 @@ There are three different types of connectors we will be using. The semicolon (;
 
 ### Development and Testing Roadmap
 - Create composite class structure
-  - Create base class
+  - Create base class (#3)
     - Unit test base class with mocks
-  - Create and (&&) connector class
+  - Create and (&&) connector class (#5)
     - Unit test
-  - Create or (||) connector class
+  - Create or (||) connector class (#6)
     - Unit test
-  - Create command class
+  - Create command class (#4)
     - Unit test
-  - Integration test with mock main
+  - Integration test with mock main (#7)
 - Create main
-  - Create main function loop
-  - Create function parser
-  - Thorough and rigorous unit testing
+  - Create main function loop (#8)
+  - Create function parser (#9)
+  - Thorough and rigorous unit testing (#10)
 - Integration testing
-  - Test single commands
-  - Test connected commands
-  - Test commands with comments
-  - Test exit commands
-
-//todo: add github issues and links with md
+  - Test single commands (#11)
+  - Test connected commands (#12)
+  - Test commands with comments (#13)
+  - Test exit commands (#14)
