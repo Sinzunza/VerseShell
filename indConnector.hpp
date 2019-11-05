@@ -4,14 +4,15 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include "base.hpp"
-
 class indConnector : public base {
 	public:
 		indConnector() : base() { succeeded = false; }
         	virtual void execute(char* args[]){
             		pid_t pid = fork();
-            		if (pid == 0){
+			if (pid < 0){
+				 std::cout << "Fork failed." << std::endl;
+			}
+            		else if (pid == 0){
                 		execvp(args[0],args);
             		}
             		else {
