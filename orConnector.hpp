@@ -1,5 +1,5 @@
 #ifndef ORCONNECTOR_HPP
-#define ORDCONNECTOR_HPP
+#define ORCONNECTOR_HPP
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -13,9 +13,12 @@ class orConnector : public base {
 			succeeded = false;
 		}       
 		virtual void execute(char* args[]){	
-			(!leftBase->getSucceeded()) {
+			if (!leftBase->getSucceeded()) {
             			pid_t pid = fork();
-            			if (pid == 0){
+				if (pid < 0){
+					 std::cout << "Fork failed." << std::endl;
+				}
+            			else if (pid == 0){
                 			execvp(args[0],args);
             			}
             			else{
