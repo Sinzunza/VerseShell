@@ -4,8 +4,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include "base.hpp"
-
 class orConnector : public base {
 	public: 
 		orConnector(base *leftBase) : base(){

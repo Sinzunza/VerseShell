@@ -4,8 +4,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include "base.hpp"
-
 class indConnector : public base {
 	public:
 		indConnector() : base() { succeeded = false; }
