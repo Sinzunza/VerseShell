@@ -21,7 +21,6 @@ class andConnector : public base
 			succeeded = false;
 		}
 		virtual void execute(char* args[]){
-			leftBase->execute();
 			if (leftBase->getSucceeded())
 			{
 				pid_t pid = fork();
