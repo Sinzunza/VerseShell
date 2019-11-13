@@ -27,7 +27,7 @@ TEST(orConnectorTests, using_echo_succeeded) {
 
     EXPECT_EQ(orBase->getSucceeded(), false);
 }
-/*
+
 TEST(orConnectorTests, using_echo_not_succeeded) {
     std::string cmdOneOr = "fdgjk";
     char *charOneOr = const_cast<char*>(cmdOneOr.c_str());
@@ -47,7 +47,7 @@ TEST(orConnectorTests, using_echo_not_succeeded) {
 
     EXPECT_EQ(orBase2->getSucceeded(), true);
 }
-*/
+
 TEST(orConnectorTests, using_echo_succeeded_allConnectors) {
     std::string cmdOneOr = "echo";
     char *charOneOr = const_cast<char*>(cmdOneOr.c_str());
