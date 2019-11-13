@@ -1,10 +1,37 @@
 #include <iostream>
 #include <string>
+#include "base.hpp"
 #include "indConnector.hpp"
 #include "orConnector.hpp"
+#include "andConnector.hpp"
+
+char* createCommand(std::string fragment)
+{
+
+	char* ret[10];
+	unsigned loc = 0;
+	string arg = "";
+	for (char c : fragment)
+	{
+		if (c == ' ')
+		{
+			ret[loc] = const_cast<char*>(arg.c_str());
+			arg = "";
+			loc++;
+		}
+		else
+		{
+			arg = arg + c;
+		}
+	}
+	ret[loc] = const_cast<char*>(arg.c_str());
+	loc++
+	ret[loc] = NULL;
+	return ret;
+}
 
 int main(){
-
+	std::cout << "$ ";
 	std::string userEntered;
 	getline(std::cin,userEntered);
 
@@ -17,24 +44,28 @@ int main(){
                 		if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex,i); } //checks if this is the last command. substr() different if so
                 		else { currentCommand = userEntered.substr(lastIndex,i+1); }
                 		lastIndex = i;
+				char* a = createCommand(currentCommand);
                 		//create command
                         }
                         else if (userEntered.at(lastIndex) == ';'){
                 		if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 1,(i - (lastIndex+1))); } //checks if this is the last command.  substr() different if so
                 		else { currentCommand = userEntered.substr(lastIndex + 1,(i - (lastIndex))); }
                 		lastIndex = i;
+				char* a = createCommand(currentCommand);
                                 //create command
                 	}
                 	else if(userEntered.substr(lastIndex,2) == "&&"){
                         	if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 2))); } //checks if this is the last command.  substr() different if so
                 		else { currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 1))); }
                			lastIndex = i;
+				char* a = createCommand(currentCommand);
                			//create command
              		}
               		else if(userEntered.substr(lastIndex,2) == "||"){
                 		if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 2))); } //checks if this is the last command.  substr() different if so
                 		else { currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 1))); }
                 		lastIndex = i;
+				char* a = createCommand(currentCommand);
               			//create command
                		}
 		}

@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <stdio.h>
+#include <errno.h>
 
 class indConnector : public base {
 	public:
@@ -20,10 +22,12 @@ class indConnector : public base {
 			}
             		else if (pid == 0){
                 		execvp(arguments[0],arguments);
+				perror("command execution failed");
             		}
             		else {
 				int status;
             			waitpid(0, &status, WCONTINUED);
+				perror("wait for child failed");
 				if(WIFEXITED(status)){
 					succeeded = true;
 				}	     
