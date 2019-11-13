@@ -31,10 +31,13 @@ class orConnector : public base {
 					int status;
 					waitpid(0, &status, WCONTINUED); 
 					perror("wait for child failed");
-					if(WIFEXITED(status)){
-						succeeded = true;
-					}   
-	    			}
+					 if(status == 0){
+                                        succeeded = true;
+                                	}
+                        	}
+                        	if(pid == 0){
+                        		_exit(-1);
+                        	}
 	    		}		
 		}
 	private:
