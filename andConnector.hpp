@@ -20,7 +20,7 @@ class andConnector : public base
 			}
 			succeeded = false;
 		}
-		virtual void execute(char* args[]){
+		virtual void execute(){
 			if (leftBase->getSucceeded())
 			{
 				pid_t pid = fork();
@@ -39,5 +39,5 @@ class andConnector : public base
 				}
 			}	
 		}		
-}
+};
 #endif
