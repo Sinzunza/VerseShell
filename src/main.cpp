@@ -54,7 +54,8 @@ char** createCommand(std::string fragment)
 		if (fragment.at(i) == ' ') //add argument to args list
 		{
 			ret[loc] = const_cast<char*>(arg.c_str());
-			std::cout << "adding " << arg << "to command stack" << std::endl;
+			std::cout << "adding " << arg << " to command stack" << std::endl;
+			std::cout << ret[loc] << endl;
 			arg = "";
 			loc++;
 		}
@@ -64,8 +65,11 @@ char** createCommand(std::string fragment)
 		}
 	}
 	ret[loc] = const_cast<char*>(arg.c_str()); //there won't be a space at the end
+	std::cout << "adding " << arg << " to command stack" << std::endl;
+	std::cout << ret[loc] << endl;
 	loc++;
 	ret[loc] = NULL; //finish up
+	std::cout << "adding null to command stack" << std::endl;
 	return ret;
 }
 
