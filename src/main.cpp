@@ -1,30 +1,16 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <sstream>
+#include <cstring>
 #include "base.hpp"
 #include "indConnector.hpp"
 #include "orConnector.hpp"
 #include "andConnector.hpp"
-#include <vector>
 
-std::vector<base*> cmds;
+using namespace std;
+
 bool exited = false;
-
-void executeCommands()
-{
-	for(int i = 0; i < cmds.size(); i++)
-	{
-		if(cmds.at(i)->isExit())
-		{
-			exited = true;
-			break;
-		}
-		else
-		{
-			cmds.at(i)->execute();
-		}
-	}
-	cmds.clear();
-}
 
 std::string trim(std::string s)
 {
@@ -43,92 +29,97 @@ std::string trim(std::string s)
 	return s;
 }
 
-char** createCommand(std::string fragment, char** ret)
+char** createCommand(std::string fragment,int &size)
 {
 	fragment = trim(fragment); //remove leading/trailing whitespaces
-	unsigned loc = 0;
+    vector <string> tempStrings;
 	std::string arg = "";
-	for (unsigned i = 0; i < fragment.length()-1; i++)
-	{
-		if (fragment.at(i) == ' ') //add argument to args list
-		{
-			ret[loc] = (char*)arg.c_str();
-			arg = "";
-			loc++;
-		}
-		else
-		{
-			arg = arg + fragment.at(i);
-		}
-	}
-	if (fragment.at(fragment.length()-1) != '|' && fragment.at(fragment.length()-1) != '&' && fragment.at(fragment.length()-1) != ';')
-	{
-		arg = arg + fragment.at(fragment.length()-1);
-	}
-	ret[loc] = (char*)arg.c_str(); //there won't be a space at the end
-	loc++;
-	ret[loc] = NULL; //finish up
-	return ret;
-}
-
-void addToCmds(char prev, char* args[10])
-{
-	std::cout << "adding command " << args[0] << std::endl << "it has arguments" << args[1] << " and " << args[2] << std::endl;
-	if (cmds.empty())
-	{
-		cmds.push_back(new indConnector(args));
-	}
-	else if (prev == '&')
-	{
-		cmds.push_back(new andConnector(cmds.at(cmds.size()-1), args));	
-	}
-	else if (prev == '|')
-	{
-		cmds.push_back(new orConnector(cmds.at(cmds.size()-1), args));
-	}
-	else
-	{
-		cmds.push_back(new indConnector(args));
-	}
+	std::stringstream tempStream;
+    tempStream << fragment;
+    while(tempStream >> arg){
+        tempStrings.push_back(arg);
+    }
+    char ** arr = new char*[tempStrings.size()+1];
+    size_t i;
+    for(i = 0; i < tempStrings.size(); i++){ //alocate new string literal and copy to arr
+        arr[i] = new char[tempStrings[i].size() + 1];
+        strcpy(arr[i], tempStrings[i].c_str());
+    }
+    arr[i] = NULL;
+    size = tempStrings.size();
+	return arr;
 }
 
 int main(){
 	while(!exited){
 		std::cout << "\n$ ";
-		std::string userEntered;
+		std::string userEntered; //echo hello world; touch hello.txt && ls; mrkir newFolder || mkdir truefolder
 		getline(std::cin,userEntered);
-		char** ags = new char*[10];
 
-		std::string currentCommand; //addToCmds(userEntered.at(lastIndex), userEntered.at(i), createCommand(currentCommand));
+        std::string currentCommand;
+        base *lastCommand;
 
-		int lastIndex = 0;  //keeps track of last connector
-		for(unsigned i = 0; i < userEntered.length(); i++){
-	        	if (userEntered.substr(i,2) == "&&" || userEntered.substr(i,2) == "||"){
-				currentCommand = userEntered.substr(lastIndex, i-lastIndex);
-				ags = createCommand(currentCommand, ags);
-				addToCmds(userEntered.at(lastIndex), ags);
-				i++;
-				lastIndex = i;
-			}
-			else if (userEntered.at(i) == ';')
-			{
-				currentCommand = userEntered.substr(lastIndex, i-lastIndex+1);
-				ags = createCommand(currentCommand, ags);
-				addToCmds(userEntered.at(lastIndex), ags);
-				lastIndex = i;
-			}
-			else if (userEntered.size()-1 == i)
-			{
-				currentCommand = userEntered.substr(lastIndex, i-lastIndex+1);
-				currentCommand = trim(currentCommand);
-				if (currentCommand != "") {
-					ags = createCommand(currentCommand, ags);
-				addToCmds(userEntered.at(lastIndex), ags);
-				}
-				lastIndex = i;
-			}
-		}
-		executeCommands();
+        int lastIndex = 0; 
+        for(unsigned i = 0; i < userEntered.length(); i++){
+            if(userEntered.at(i) == ';' || userEntered.substr(i,2) == "&&" ||userEntered.substr(i,2) == "||" || i == userEntered.length()-1){
+                if (lastIndex == 0){
+                    if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex,i); }
+                    else { currentCommand = userEntered.substr(lastIndex,i+1); }
+                    lastIndex = i;
+                    int size;
+                    char ** tempC = createCommand(currentCommand,size);
+                    base *firstBase = new indConnector(tempC);
+                    firstBase->execute();
+                    for(size_t j = 0; j < size; j++){
+                    delete [] tempC[j];
+                    }
+                    delete [] tempC;
+                    lastCommand = firstBase;
+                }
+                else if (userEntered.at(lastIndex) == ';'){
+                    if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 1,(i - (lastIndex+1))); }
+                    else { currentCommand = userEntered.substr(lastIndex + 1,(i - (lastIndex))); }
+                    lastIndex = i;
+                    int size;
+                    char ** tempC = createCommand(currentCommand,size);
+                    base *indBase = new indConnector(tempC);
+                    indBase->execute();
+                    for(size_t j = 0; j < size; j++){
+                    delete [] tempC[j];
+                    }
+                    delete [] tempC;
+                    lastCommand = indBase;
+                }
+                else if(userEntered.substr(lastIndex,2) == "&&"){
+                    if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 2))); }
+                    else { currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 1))); }
+                    lastIndex = i;
+                    int size;
+                    char ** tempC = createCommand(currentCommand,size);
+                    base *andBase = new andConnector(lastCommand, tempC);
+                    andBase->execute();
+                    for(size_t j = 0; j < size; j++){
+                    delete [] tempC[j];
+                    }
+                    delete [] tempC;
+                    lastCommand = andBase;
+                }
+                else if(userEntered.substr(lastIndex,2) == "||"){
+                    if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 2))); }
+                    else { currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 1))); }
+                    lastIndex = i;
+                    int size;
+                    char ** tempC = createCommand(currentCommand,size);
+                    base *orBase = new orConnector(lastCommand, tempC);
+                    orBase->execute();
+                    for(size_t j = 0; j < size; j++){
+                    delete [] tempC[j];
+                    }
+                    delete [] tempC;
+                    lastCommand = orBase;
+                }
+            }
+        }	
 	}
 	return 0;
 }
