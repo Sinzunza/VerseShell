@@ -6,17 +6,21 @@
 #include "andConnector.hpp"
 #include <vector>
 
-std::vector<base> cmds;
+std::vector<base*> cmds;
 bool exited = false;
 
 void executeCommands()
 {
-	for(base command : cmds)
+	for(int i = 0; i < cmds.size(); i++)
 	{
-		if(command.isExit())
+		if(cmds.at(i)->isExit())
 		{
 			exited = true;
 			break;
+		}
+		else
+		{
+			cmds.at(i)->execute
 		}
 	}
 	cmds.clear();
@@ -94,7 +98,7 @@ int main(){
 
 		int lastIndex = 0;  //keeps track of last connector
 		for(unsigned i = 0; i < userEntered.length(); i++){
-	        	if (userEntered.substr(i,2) == "&&" || userEntered.substr)(i,2) == "||"){
+	        	if (userEntered.substr(i,2) == "&&" || userEntered.substr(i,2) == "||"){
 				i++
 				currentCommand = userEntered.substr(lastIndex, i-lastIndex);
 				addToCmds(userEntered.at(lastIndex), createCommand(currentCommand));
