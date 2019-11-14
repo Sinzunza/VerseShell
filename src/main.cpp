@@ -54,8 +54,6 @@ char** createCommand(std::string fragment)
 		if (fragment.at(i) == ' ') //add argument to args list
 		{
 			ret[loc] = const_cast<char*>(arg.c_str());
-			std::cout << "adding " << arg << " to command stack" << std::endl;
-			std::cout << ret[loc] << std::endl;
 			arg = "";
 			loc++;
 		}
@@ -64,12 +62,13 @@ char** createCommand(std::string fragment)
 			arg = arg + fragment.at(i);
 		}
 	}
+	if (fragment.at(fragment.length()-1) != '|' && fragment.at(fragment.length()-1) != '&' && fragment.at(fragment.length()-1) != ';')
+	{
+		arg = arg + fragment.at(fragment.length()-1);
+	}
 	ret[loc] = const_cast<char*>(arg.c_str()); //there won't be a space at the end
-	std::cout << "adding " << arg << " to command stack" << std::endl;
-	std::cout << ret[loc] << std::endl;
 	loc++;
 	ret[loc] = NULL; //finish up
-	std::cout << "adding null to command stack" << std::endl;
 	return ret;
 }
 
@@ -104,9 +103,9 @@ int main(){
 		int lastIndex = 0;  //keeps track of last connector
 		for(unsigned i = 0; i < userEntered.length(); i++){
 	        	if (userEntered.substr(i,2) == "&&" || userEntered.substr(i,2) == "||"){
-				i++;
 				currentCommand = userEntered.substr(lastIndex, i-lastIndex);
 				addToCmds(userEntered.at(lastIndex), createCommand(currentCommand));
+				i++;
 				lastIndex = i;
 			}
 			else if (userEntered.at(i) == ';')
