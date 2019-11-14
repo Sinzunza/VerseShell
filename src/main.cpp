@@ -53,7 +53,7 @@ char** createCommand(std::string fragment)
 	{
 		if (fragment.at(i) == ' ') //add argument to args list
 		{
-			ret[loc] = const_cast<char*>(arg.c_str());
+			ret[loc] = (char*)arg.c_str();
 			arg = "";
 			loc++;
 		}
@@ -66,7 +66,7 @@ char** createCommand(std::string fragment)
 	{
 		arg = arg + fragment.at(fragment.length()-1);
 	}
-	ret[loc] = const_cast<char*>(arg.c_str()); //there won't be a space at the end
+	ret[loc] = (char*)arg.c_str(); //there won't be a space at the end
 	loc++;
 	ret[loc] = NULL; //finish up
 	return ret;
