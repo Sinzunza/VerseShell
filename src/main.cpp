@@ -6,12 +6,12 @@
 #include "andConnector.hpp"
 #include <vector>
 
-vector<base> cmds;
+std::vector<base> cmds;
 bool exited = false;
 
 void executeCommands()
 {
-	for(command : cmds)
+	for(base command : cmds)
 	{
 		if(command.isExit())
 		{
@@ -28,13 +28,13 @@ std::string trim(std::string s)
 	{
 		s.erase(0,1);
 	}
-	while s.at(fragment.size()-1 == ' ')
+	while s.at(s.size()-1 == ' ')
 	{
-		s.erase(fragment.size()-1,1);
+		s.erase(s.size()-1,1);
 	}
-	while s.at(fragment.size()-2) == ' ')
+	while s.at(s.size()-2) == ' ')
 	{
-		s.erase(fragment.size()-2,1);
+		s.erase(s.size()-2,1);
 	}
 	return s;
 }
@@ -55,7 +55,7 @@ char** createCommand(std::string fragment)
 		}
 		else
 		{
-			arg = arg + c;
+			arg = arg + fragment.at(i);
 		}
 	}
 	ret[loc] = const_cast<char*>(arg.c_str());
