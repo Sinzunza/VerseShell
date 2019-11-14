@@ -46,7 +46,7 @@ std::string trim(std::string s)
 char** createCommand(std::string fragment)
 {
 	fragment = trim(fragment); //remove leading/trailing whitespaces
-	char* ret = new char*[10];
+	char** ret = new char*[10];
 	unsigned loc = 0;
 	std::string arg = "";
 	for (unsigned i = 0; i < fragment.length()-1; i++)
