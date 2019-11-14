@@ -8,8 +8,6 @@
 #include "orConnector.hpp"
 #include "andConnector.hpp"
 
-using namespace std;
-
 bool exited = false;
 
 std::string trim(std::string s)
@@ -32,7 +30,7 @@ std::string trim(std::string s)
 char** createCommand(std::string fragment,int &size)
 {
 	fragment = trim(fragment); //remove leading/trailing whitespaces
-    vector <string> tempStrings;
+    std::vector <std::string> tempStrings;
 	std::string arg = "";
 	std::stringstream tempStream;
     tempStream << fragment;
