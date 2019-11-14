@@ -74,6 +74,7 @@ char** createCommand(std::string fragment)
 
 void addToCmds(char prev, char* args[10])
 {
+	std::cout << "adding command " << args[0] << std::endl << "it has arguments" << args[1] << " and " << args[2] << std::endl;
 	if (cmds.empty())
 	{
 		cmds.push_back(new indConnector(args));
