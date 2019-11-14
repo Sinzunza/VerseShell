@@ -20,7 +20,7 @@ void executeCommands()
 		}
 		else
 		{
-			cmds.at(i)->execute
+			cmds.at(i)->execute();
 		}
 	}
 	cmds.clear();
@@ -32,11 +32,11 @@ std::string trim(std::string s)
 	{
 		s.erase(0,1);
 	}
-	while s.at(s.size()-1 == ' ')
+	while (s.at(s.size()-1 == ' ')
 	{
 		s.erase(s.size()-1,1);
 	}
-	while s.at(s.size()-2) == ' ')
+	while (s.at(s.size()-2) == ' ')
 	{
 		s.erase(s.size()-2,1);
 	}
@@ -80,7 +80,7 @@ void addToCmds(char prev, char* args[10])
 	}
 	else if (prev == '|')
 	{
-		cmds.push_back(new orConnector(cmds.at)cmds.size()-1), args));
+		cmds.push_back(new orConnector(cmds.at(cmds.size()-1), args));
 	}
 	else
 	{
