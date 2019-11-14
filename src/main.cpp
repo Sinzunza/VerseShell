@@ -20,14 +20,6 @@ void executeCommands()
 		}
 		else
 		{
-			std::cout << "i have: ";
-			for (int j = 0; j < 10, i++)
-			{
-				for (int k = 0; k < 3, k++)
-				{
-					std::cout << cmds.at(i)[j][k];
-				}
-			}
 			cmds.at(i)->execute();
 		}
 	}
@@ -62,6 +54,7 @@ char** createCommand(std::string fragment)
 		if (fragment.at(i) == ' ') //add argument to args list
 		{
 			ret[loc] = const_cast<char*>(arg.c_str());
+			std::cout << "adding " << arg << "to command stack" << std::endl;
 			arg = "";
 			loc++;
 		}
