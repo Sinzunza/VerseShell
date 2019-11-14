@@ -43,10 +43,9 @@ std::string trim(std::string s)
 	return s;
 }
 
-char** createCommand(std::string fragment)
+char** createCommand(std::string fragment, char** ret)
 {
 	fragment = trim(fragment); //remove leading/trailing whitespaces
-	char** ret = new char*[10];
 	unsigned loc = 0;
 	std::string arg = "";
 	for (unsigned i = 0; i < fragment.length()-1; i++)
@@ -98,6 +97,7 @@ int main(){
 		std::cout << "\n$ ";
 		std::string userEntered;
 		getline(std::cin,userEntered);
+		char** ags = new char*[10];
 
 		std::string currentCommand; //addToCmds(userEntered.at(lastIndex), userEntered.at(i), createCommand(currentCommand));
 
@@ -105,21 +105,26 @@ int main(){
 		for(unsigned i = 0; i < userEntered.length(); i++){
 	        	if (userEntered.substr(i,2) == "&&" || userEntered.substr(i,2) == "||"){
 				currentCommand = userEntered.substr(lastIndex, i-lastIndex);
-				addToCmds(userEntered.at(lastIndex), createCommand(currentCommand));
+				ags = createCommand(currentCommand, ags));
+				addToCmds(userEntered.at(lastIndex), ags);
 				i++;
 				lastIndex = i;
 			}
 			else if (userEntered.at(i) == ';')
 			{
 				currentCommand = userEntered.substr(lastIndex, i-lastIndex+1);
-				addToCmds(userEntered.at(lastIndex), createCommand(currentCommand));
+				ags = createCommand(currentCommand, ags));
+				addToCmds(userEntered.at(lastIndex), ags);
 				lastIndex = i;
 			}
 			else if (userEntered.size()-1 == i)
 			{
 				currentCommand = userEntered.substr(lastIndex, i-lastIndex+1);
 				currentCommand = trim(currentCommand);
-				if (currentCommand != "") {addToCmds(userEntered.at(lastIndex), createCommand(currentCommand));}
+				if (currentCommand != "") {
+					ags = createCommand(currentCommand, ags));
+				addToCmds(userEntered.at(lastIndex), ags);
+				}
 				lastIndex = i;
 			}
 		}
