@@ -5,15 +5,49 @@
 #include "orConnector.hpp"
 #include "andConnector.hpp"
 #include <vector>
-char* createCommand(std::string fragment)
-{
 
+vector<base> cmds;
+bool exited = false;
+
+void executeCommands()
+{
+	for(command : cmds)
+	{
+		if(command.isExit())
+		{
+			exited = true;
+			break;
+		}
+	}
+	cmds.clear();
+}
+
+std::string trim(std::string s)
+{
+	while (s.at(0) == ' ')
+	{
+		s.erase(0,1);
+	}
+	while s.at(fragment.size()-1 == ' ')
+	{
+		s.erase(fragment.size()-1,1);
+	}
+	while s.at(fragment.size()-2) == ' ')
+	{
+		s.erase(fragment.size()-2,1);
+	}
+	return s;
+}
+
+char** createCommand(std::string fragment)
+{
+	fragment = trim(fragment);
 	char* ret[10];
 	unsigned loc = 0;
 	std::string arg = "";
-	for (char c : fragment)
+	for (unsigned i = 0; i < fragment.length()-1; i++)
 	{
-		if (c == ' ')
+		if (fragment.at(i) == ' ')
 		{
 			ret[loc] = const_cast<char*>(arg.c_str());
 			arg = "";
@@ -27,56 +61,60 @@ char* createCommand(std::string fragment)
 	ret[loc] = const_cast<char*>(arg.c_str());
 	loc++;
 	ret[loc] = NULL;
-	return ret[0];
+	return ret;
 }
 
-
+void addToCmds(char prev, char* args[10])
+{
+	if (cmds.empty())
+	{
+		cmds.push_back(new indConnector(args));
+	}
+	else if (prev == '&')
+	{
+		cmds.push_back(new andConnector(cmds.at(cmds.size()-1), args));	
+	}
+	else if (prev == '|')
+	{
+		cmds.push_back(new orConnector(cmds.at)cmds.size()-1), args));
+	}
+	else
+	{
+		cmds.push_back(new indConnector(args));
+	}
+}
 
 int main(){
-	vector<base> cmds;
-	bool exited = false;
 	while(!exited){
-		std::cout << "$ ";
+		std::cout << "\n$ ";
 		std::string userEntered;
 		getline(std::cin,userEntered);
 
-		std::string currentCommand;
+		std::string currentCommand; //addToCmds(userEntered.at(lastIndex), userEntered.at(i), createCommand(currentCommand));
 
 		int lastIndex = 0;  //keeps track of last connector
 		for(unsigned i = 0; i < userEntered.length(); i++){
-	        	if(userEntered.at(i) == ';' || userEntered.substr(i,2) == "&&" ||userEntered.substr(i,2) == "||" || i == userEntered.length()-1){
-	            		if (lastIndex == 0){
-        	        		if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex,i); } //checks if this is the last command. substr() different if so
-                			else { currentCommand = userEntered.substr(lastIndex,i+1); }
-                			lastIndex = i;
-					char* a = createCommand(currentCommand);
-                			//create command
-	                        }
-        	                else if (userEntered.at(lastIndex) == ';'){
-                			if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 1,(i - (lastIndex+1))); } //checks if this is the last command.  substr() different if so
-                			else { currentCommand = userEntered.substr(lastIndex + 1,(i - (lastIndex))); }
-                			lastIndex = i;
-					char* a = createCommand(currentCommand);
-        	                        //create command
-	                	}
-	                	else if(userEntered.substr(lastIndex,2) == "&&"){
-        	                	if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 2))); } //checks if this is the last command.  substr() different if so
-                			else { currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 1))); }
-               				lastIndex = i;
-					char* a = createCommand(currentCommand);
-               				//create command
-             			}
-              			else if(userEntered.substr(lastIndex,2) == "||"){
-                			if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 2))); } //checks if this is the last command.  substr() different if so
-                			else { currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 1))); }
-                			lastIndex = i;
-					char* a = createCommand(currentCommand);
-              				//create command
-               			}
+	        	if (userEntered.substr(i,2) == "&&" || userEntered.substr)(i,2) == "||"){
+				i++
+				currentCommand = userEntered.substr(lastIndex, i-lastIndex);
+				addToCmds(userEntered.at(lastIndex), createCommand(currentCommand));
+				lastIndex = i;
 			}
-		}       
+			else if (userEntered.at(i) == ";"
+			{
+				currentCommand = userEntered.substr(lastIndex, i-lastIndex+1);
+				addToCmds(userEntered.at(lastIndex), createCommand(currentCommand));
+				lastIndex = i;
+			}
+			else if (userEntered.size()-1 == i)
+			{
+				currentCommand = userEntered.substr(lastIndex, i-lastIndex+1);
+				currentCommand = trim(currentCommand);
+				if (currentCommand != "") {addToCmds(userEntered.at(lastIndex), createCommand(currentCommand));}
+				lastIndex = i;
+			}
+		}
+		executeCommands();
 	}
- 
 	return 0;
 }
-
