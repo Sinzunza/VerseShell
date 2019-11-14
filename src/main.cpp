@@ -20,6 +20,14 @@ void executeCommands()
 		}
 		else
 		{
+			std::cout << "i have: ";
+			for (int j = 0; j < 10, i++)
+			{
+				for (int k = 0; k < 3, k++)
+				{
+					std::cout << cmds.at(i)[j][k];
+				}
+			}
 			cmds.at(i)->execute();
 		}
 	}
