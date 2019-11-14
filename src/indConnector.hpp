@@ -14,31 +14,36 @@ class indConnector : public base {
 			{
 				arguments[i] = args[i];
 			}
-		       	succeeded = false; }
+		       	succeeded = false;
+                tempExit = false;
+        }
         	virtual void execute(){
-            		pid_t pid = fork();
-			if (pid < 0){
-				 std::cout << "Fork failed." << std::endl;
-			}
-            		else if (pid == 0){
-                		execvp(arguments[0],arguments);
-				perror("command execution failed");
-            		}
-            		else {
-				int status;
-            			waitpid(0, &status, WCONTINUED);
-				perror("wait for child failed");
-				 if(status == 0){
-                                        succeeded = true;
-                                }
+                    if (strcmp(arguments[0], "exit") == 0){
+                        tempExit = true;
+                    }
+                    else {
+                    pid_t pid = fork();
+                    if (pid < 0){
+                        std::cout << "Fork failed." << std::endl;
+                    }
+                    else if (pid == 0){
+                            execvp(arguments[0],arguments);
+                        perror("command execution failed");
+                    }
+                    else {
+                        int status;
+                        waitpid(0, &status, WCONTINUED);
+                        perror("wait for child failed");
+                        if(status == 0){
+                            succeeded = true;
                         }
-                        if(pid == 0){
+                    }
+                    if(pid == 0){
                         _exit(-1);
-                        }
-
+                    }
+                    }
 		}
 		
 };
 
 #endif
-

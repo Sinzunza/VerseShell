@@ -10,12 +10,12 @@ class base
 		bool getSucceeded(){ return succeeded; }
 		bool isExit()	
 		{
-			if (arguments[0] == "exit") {return true;}
-			else {return false;}
+            return tempExit;
 		}
 		virtual void execute() = 0;
 	protected:
 		bool succeeded;
+        bool tempExit;
 		char* arguments[10];
 };
 #endif
