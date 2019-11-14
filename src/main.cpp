@@ -45,13 +45,13 @@ std::string trim(std::string s)
 
 char** createCommand(std::string fragment)
 {
-	fragment = trim(fragment);
-	char* ret = new char*[10];
+	fragment = trim(fragment); //remove leading/trailing whitespaces
+	char* ret = new char[10];
 	unsigned loc = 0;
 	std::string arg = "";
 	for (unsigned i = 0; i < fragment.length()-1; i++)
 	{
-		if (fragment.at(i) == ' ')
+		if (fragment.at(i) == ' ') //add argument to args list
 		{
 			ret[loc] = const_cast<char*>(arg.c_str());
 			arg = "";
@@ -62,10 +62,10 @@ char** createCommand(std::string fragment)
 			arg = arg + fragment.at(i);
 		}
 	}
-	ret[loc] = const_cast<char*>(arg.c_str());
+	ret[loc] = const_cast<char*>(arg.c_str()); //there won't be a space at the end
 	loc++;
-	ret[loc] = NULL;
-	return ret[];
+	ret[loc] = NULL; //finish up
+	return ret;
 }
 
 void addToCmds(char prev, char* args[10])
