@@ -37,21 +37,20 @@ There are three different types of connectors we will be using. The semicolon (;
 
 ### Development and Testing Roadmap
 - Create composite class structure
-  - Create base class - [#3](https://github.com/cs100/assignment-sigp/issues/3)
+  - Create base class - Completed!
     - Unit test base class with mocks
-  - Create and (&&) connector class - [#5](https://github.com/cs100/assignment-sigp/issues/5)
+  - Create and (&&) connector class - Completed!
     - Unit test
-  - Create or (||) connector class - [#6](https://github.com/cs100/assignment-sigp/issues/6)
+  - Create or (||) connector class - Completed!
     - Unit test
-  - Create command class - [#4](https://github.com/cs100/assignment-sigp/issues/4)
+  - Create command class - Completed!
     - Unit test
-  - Integration test with mock main - [#7](https://github.com/cs100/assignment-sigp/issues/7)
+  - Integration test with mock main - Completed!
 - Create main
-  - Create main function loop - [#8](https://github.com/cs100/assignment-sigp/issues/8)
-  - Create function parser - [#9](https://github.com/cs100/assignment-sigp/issues/9)
-  - Thorough and rigorous unit testing - [#10](https://github.com/cs100/assignment-sigp/issues/10)
-- Integration testing
-  - Test single commands - [#11](https://github.com/cs100/assignment-sigp/issues/11)
-  - Test connected commands - [#12](https://github.com/cs100/assignment-sigp/issues/12)
-  - Test commands with comments - [#13](https://github.com/cs100/assignment-sigp/issues/13)
-  - Test exit commands - [#14](https://github.com/cs100/assignment-sigp/issues/14)
+  - Create main function loop - Completed!
+  - Create function parser - Completed!
+  - Thorough and rigorous unit testing - Completed!
+  - Test single commands - Completed!
+  - Test connected commands - Completed!
+  - Test commands with comments - Completed!
+  - Test exit commands - Completed!
