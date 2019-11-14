@@ -1,3 +1,5 @@
+.gitmodules
+
 # Prerequisites
 *.d
 
@@ -31,6 +33,7 @@
 *.exe
 *.out
 *.app
+*.log
 rshell
 test
 

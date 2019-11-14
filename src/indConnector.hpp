@@ -33,7 +33,6 @@ class indConnector : public base {
                     else {
                         int status;
                         waitpid(0, &status, WCONTINUED);
-                        perror("wait for child failed");
                         if(status == 0){
                             succeeded = true;
                         }
