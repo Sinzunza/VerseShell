@@ -16,9 +16,14 @@ class orConnector : public base {
 				arguments[i] = args[i];
 			}
 			succeeded = false;
+            tempExit = false;
 		}       
 		virtual void execute(){	
 			if (!leftBase->getSucceeded()) {
+                if (strcmp(arguments[0], "exit") == 0){
+                        tempExit = true;
+                }
+                else {
             			pid_t pid = fork();
 				if (pid < 0){
 					 std::cout << "Fork failed." << std::endl;
@@ -38,11 +43,11 @@ class orConnector : public base {
                         	if(pid == 0){
                         		_exit(-1);
                         	}
-	    		}		
+	    		}
+            }
 		}
 	private:
 		base *leftBase;
 };
 
 #endif
-
