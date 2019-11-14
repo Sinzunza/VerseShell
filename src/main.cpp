@@ -32,7 +32,7 @@ std::string trim(std::string s)
 	{
 		s.erase(0,1);
 	}
-	while (s.at(s.size()-1 == ' ')
+	while (s.at(s.size()-1) == ' ')
 	{
 		s.erase(s.size()-1,1);
 	}
@@ -99,7 +99,7 @@ int main(){
 		int lastIndex = 0;  //keeps track of last connector
 		for(unsigned i = 0; i < userEntered.length(); i++){
 	        	if (userEntered.substr(i,2) == "&&" || userEntered.substr(i,2) == "||"){
-				i++
+				i++;
 				currentCommand = userEntered.substr(lastIndex, i-lastIndex);
 				addToCmds(userEntered.at(lastIndex), createCommand(currentCommand));
 				lastIndex = i;
