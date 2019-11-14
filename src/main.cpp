@@ -104,7 +104,7 @@ int main(){
 				addToCmds(userEntered.at(lastIndex), createCommand(currentCommand));
 				lastIndex = i;
 			}
-			else if (userEntered.at(i) == ";"
+			else if (userEntered.at(i) == ';')
 			{
 				currentCommand = userEntered.substr(lastIndex, i-lastIndex+1);
 				addToCmds(userEntered.at(lastIndex), createCommand(currentCommand));
