@@ -105,7 +105,7 @@ int main(){
 		for(unsigned i = 0; i < userEntered.length(); i++){
 	        	if (userEntered.substr(i,2) == "&&" || userEntered.substr(i,2) == "||"){
 				currentCommand = userEntered.substr(lastIndex, i-lastIndex);
-				ags = createCommand(currentCommand, ags));
+				ags = createCommand(currentCommand, ags);
 				addToCmds(userEntered.at(lastIndex), ags);
 				i++;
 				lastIndex = i;
@@ -113,7 +113,7 @@ int main(){
 			else if (userEntered.at(i) == ';')
 			{
 				currentCommand = userEntered.substr(lastIndex, i-lastIndex+1);
-				ags = createCommand(currentCommand, ags));
+				ags = createCommand(currentCommand, ags);
 				addToCmds(userEntered.at(lastIndex), ags);
 				lastIndex = i;
 			}
@@ -122,7 +122,7 @@ int main(){
 				currentCommand = userEntered.substr(lastIndex, i-lastIndex+1);
 				currentCommand = trim(currentCommand);
 				if (currentCommand != "") {
-					ags = createCommand(currentCommand, ags));
+					ags = createCommand(currentCommand, ags);
 				addToCmds(userEntered.at(lastIndex), ags);
 				}
 				lastIndex = i;
