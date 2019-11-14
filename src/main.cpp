@@ -65,7 +65,7 @@ char** createCommand(std::string fragment)
 	ret[loc] = const_cast<char*>(arg.c_str());
 	loc++;
 	ret[loc] = NULL;
-	return ret;
+	return ret[];
 }
 
 void addToCmds(char prev, char* args[10])
