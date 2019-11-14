@@ -64,7 +64,6 @@ int main(){
             if (found!=std::string::npos){
                 userEntered = userEntered.substr(0,found);
             }
-            std::cout << userEntered << std::endl;
             userEntered = trim(userEntered);
 
             std::string currentCommand;
