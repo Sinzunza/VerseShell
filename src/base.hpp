@@ -7,15 +7,15 @@ class base
 {
 	public:
 		base() { };
-		bool getSucceeded(){ return succeeded; }
+		bool isSuccessful(){ return succeeded; }
 		bool isExit()	
 		{
-            return tempExit;
+            return exited;
 		}
 		virtual void execute() = 0;
 	protected:
 		bool succeeded;
-        bool tempExit;
+        bool exited;
 		char* arguments[10];
 };
 #endif
