@@ -8,6 +8,7 @@
 #include "../src/orConnector.hpp"
 #include "../src/andConnector.hpp"
 
+
 TEST(orConnectorTests, using_echo_succeeded) {
     std::string cmdOneOr = "echo";
     char *charOneOr = const_cast<char*>(cmdOneOr.c_str());

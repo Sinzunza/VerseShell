@@ -6,6 +6,7 @@
 #include "../src/base.hpp"
 #include "../src/indConnector.hpp"
 
+
 TEST(indConnectorTest, using_echo) {
     std::string cmdOne = "echo";
     char *charOne = const_cast<char*>(cmdOne.c_str());

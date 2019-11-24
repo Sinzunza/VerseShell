@@ -29,7 +29,7 @@ std::string trim(std::string s)
 
 char** createCommand(std::string fragment,int &size)
 {
-    fragment = trim(fragment); //remove leading/trailing whitespaces
+    fragment = trim(fragment); //remove leading / trailing whitespaces
     std::vector <std::string> vectorArgs;
 	std::string currArg = "";
 	std::stringstream tempStream;
