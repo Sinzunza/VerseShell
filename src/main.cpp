@@ -8,8 +8,6 @@
 #include "orConnector.hpp"
 #include "andConnector.hpp"
 
-bool exited = false;
-
 std::string trim(std::string s)
 {
 	if(s.length() != 1) {

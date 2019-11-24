@@ -14,7 +14,7 @@ TEST(indConnectorTest, using_echo) {
     char *charAr[3] = {charOne,charTwo,NULL};
     base *indBase = new indConnector(charAr);
     indBase->execute();
-    EXPECT_EQ(indBase->getSucceeded(), true);
+    EXPECT_EQ(indBase->isSuccessful(), true);
 }
 
 
@@ -27,7 +27,7 @@ TEST(indConnectorTest, using_touch) {
     base *indBase = new indConnector(charAr);
     indBase->execute();
 	
-    EXPECT_EQ(indBase->getSucceeded(), true);
+    EXPECT_EQ(indBase->isSuccessful(), true);
 }
 
 TEST(indConnectorTest, using_ls) {
@@ -37,7 +37,7 @@ TEST(indConnectorTest, using_ls) {
     base *indBase = new indConnector(charAr);
     indBase->execute();
 
-    EXPECT_EQ(indBase->getSucceeded(), true);
+    EXPECT_EQ(indBase->isSuccessful(), true);
 }
 
 #endif

@@ -25,7 +25,7 @@ TEST(andConnectorTests, using_echo_succeeded) {
     base *andBase = new andConnector(indBase, charAr);
     andBase->execute();
 
-    EXPECT_EQ(andBase->getSucceeded(), true);
+    EXPECT_EQ(andBase->isSuccessful(), true);
 }
 
 TEST(andConnectorTests, using_echo_not_succeeded) {
@@ -45,7 +45,7 @@ TEST(andConnectorTests, using_echo_not_succeeded) {
     base *andBase2 = new andConnector(indBase2, charAr);
     andBase2->execute();
 
-    EXPECT_EQ(andBase2->getSucceeded(),false);
+    EXPECT_EQ(andBase2->isSuccessful(),false);
 }
 
 
@@ -74,7 +74,7 @@ TEST(andConnectorTests, using_echo_succeeded_allConnectors) {
     base *andBase = new andConnector(orBase, charArAnd);
     andBase->execute();
 
-    EXPECT_EQ(andBase->getSucceeded(), false);
+    EXPECT_EQ(andBase->isSuccessful(), false);
 }
 
 TEST(andConnectorTests, using_touch) {
@@ -94,7 +94,7 @@ TEST(andConnectorTests, using_touch) {
    base *andBase = new andConnector(indBase, charAr);
    andBase->execute();
 
-   EXPECT_EQ(andBase->getSucceeded(), true);
+   EXPECT_EQ(andBase->isSuccessful(), true);
 }
 
 TEST(andConnectorTests, using_ls) {
@@ -110,7 +110,7 @@ TEST(andConnectorTests, using_ls) {
    base *andBase = new andConnector(indBase, charAr);
    andBase->execute();
 
-   EXPECT_EQ(andBase->getSucceeded(), true);
+   EXPECT_EQ(andBase->isSuccessful(), true);
 }
 
 #endif

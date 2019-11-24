@@ -25,7 +25,7 @@ TEST(orConnectorTests, using_echo_succeeded) {
     base *orBase = new orConnector(indBase, charAr);
     orBase->execute();
 
-    EXPECT_EQ(orBase->getSucceeded(), false);
+    EXPECT_EQ(orBase->isSuccessful(), false);
 }
 
 TEST(orConnectorTests, using_echo_not_succeeded) {
@@ -45,7 +45,7 @@ TEST(orConnectorTests, using_echo_not_succeeded) {
     base *orBase2 = new orConnector(indBase2, charAr);
     orBase2->execute();
 
-    EXPECT_EQ(orBase2->getSucceeded(), true);
+    EXPECT_EQ(orBase2->isSuccessful(), true);
 }
 
 TEST(orConnectorTests, using_echo_succeeded_allConnectors) {
@@ -73,7 +73,7 @@ TEST(orConnectorTests, using_echo_succeeded_allConnectors) {
     base *orBase = new orConnector(andBase, charAr);
     orBase->execute();
 
-    EXPECT_EQ(orBase->getSucceeded(), false);
+    EXPECT_EQ(orBase->isSuccessful(), false);
 }
 
 TEST(orConnectorTests, using_touch) {
@@ -93,7 +93,7 @@ TEST(orConnectorTests, using_touch) {
    base *orBase = new orConnector(indBase, charAr);
    orBase->execute();
 
-   EXPECT_EQ(orBase->getSucceeded(), false);
+   EXPECT_EQ(orBase->isSuccessful(), false);
 }
 
 TEST(orConnectorTests, using_ls) {
@@ -109,7 +109,7 @@ TEST(orConnectorTests, using_ls) {
    base *orBase = new orConnector(indBase, charAr);
    orBase->execute();
 
-   EXPECT_EQ(orBase->getSucceeded(), false);
+   EXPECT_EQ(orBase->isSuccessful(), false);
 }
 
 #endif
