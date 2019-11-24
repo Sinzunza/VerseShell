@@ -9,40 +9,40 @@
 
 class indConnector : public base {
 	public:
-        indConnector(char* args[]) : base() {
+        	indConnector(char* args[]) : base() {
 			for(unsigned i = 0; i < 10; i++)
 			{
 				arguments[i] = args[i];
 			}
-            succeeded = false;
-            exited = false;
-        }
-        virtual void execute(){
-            if (strcmp(arguments[0], "exit") == 0){ //check if user wants to exit, before anything
-                exited = true;
-            }
-            else {
-                pid_t pid = fork();
-                if (pid < 0){
-                    std::cout << "Fork failed." << std::endl;
-                }
-                else if (pid == 0){
-                    execvp(arguments[0],arguments);
-                    perror("command execution failed");
-                }
-                else{
-                    int status;
-                     waitpid(0, &status, WCONTINUED); 
-                     perror("wait for child failed");
-                     if(status == 0){
-                         succeeded = true;
-                     }
-                }
-                if(pid == 0){
-                    _exit(-1);
-                }
-            }
-        }
+            		succeeded = false;
+            		exited = false;
+        	}
+        	virtual void execute(){
+            		if (strcmp(arguments[0], "exit") == 0){ //check if user wants to exit, before anything
+               			exited = true;
+            		}
+            		else {
+                		pid_t pid = fork();
+                		if (pid < 0){
+                    			std::cout << "Fork failed." << std::endl;
+                		}
+                		else if (pid == 0){
+                    			execvp(arguments[0],arguments);
+                    			perror("command execution failed");
+                		}
+                		else {
+                     			int status;
+                     			waitpid(0, &status, WCONTINUED); 
+                     			perror("wait for child failed");
+                     			if(status == 0){
+                         			succeeded = true;
+                     			}
+                		}
+                		if(pid == 0){
+                   			_exit(-1);
+                		}
+            		}
+        	}
 		
 };
 

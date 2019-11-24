@@ -15,7 +15,7 @@ class base
 		virtual void execute() = 0;
 	protected:
 		bool succeeded;
-        bool exited;
+                bool exited;
 		char* arguments[10];
 };
 #endif

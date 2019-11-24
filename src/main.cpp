@@ -8,43 +8,39 @@
 #include "orConnector.hpp"
 #include "andConnector.hpp"
 
-std::string trim(std::string s)
-{
-	if(s.length() != 1) {
-        while (s.at(0) == ' ')
-        {
-            s.erase(0,1);
-        }
-        while (s.at(s.size()-1) == ' ')
-        {
-            s.erase(s.size()-1,1);
-        }
-        while (s.at(s.size()-2) == ' ')
-        {
-            s.erase(s.size()-2,1);
-        }
-    }
+std::string trim(std::string s) {
+	if (s.length() != 1){
+        	while (s.at(0) == ' '){
+            		s.erase(0,1);
+        	}
+        	while (s.at(s.size()-1) == ' '){
+            		s.erase(s.size()-1,1);
+        	}
+        	while (s.at(s.size()-2) == ' '){
+            		s.erase(s.size()-2,1);
+        	}
+	}
     return s;
 }
 
-char** createCommand(std::string fragment,int &size)
-{
-    fragment = trim(fragment); //remove leading / trailing whitespaces
-    std::vector <std::string> vectorArgs;
+char** createCommand(std::string fragment,int &size){
+	fragment = trim(fragment); //remove leading / trailing whitespaces
+    	std::vector <std::string> vectorArgs;
 	std::string currArg = "";
-	std::stringstream tempStream;
-    tempStream << fragment;
-    while(tempStream >> currArg){
-        vectorArgs.push_back(currArg);
-    }
-    char ** chArgs = new char*[vectorArgs.size()+1]; //plus one because add null at end
-    for(unsigned i = 0; i < vectorArgs.size(); i++){ //alocate new string literal and copy to arr
-        chArgs[i] = new char[vectorArgs[i].size() + 1];
-        strcpy(chArgs[i], vectorArgs[i].c_str());
-    }
-    chArgs[vectorArgs.size()] = NULL;
-    size = vectorArgs.size();
-	return chArgs;
+    	std::stringstream tempStream;
+    	tempStream << fragment;
+    	while(tempStream >> currArg){
+        	vectorArgs.push_back(currArg);
+    	}
+
+    	char ** chArgs = new char*[vectorArgs.size()+1]; //plus one because add null at end
+    	for(unsigned i = 0; i < vectorArgs.size(); i++){ //alocate new string literal and copy to arr
+        	chArgs[i] = new char[vectorArgs[i].size() + 1];
+        	strcpy(chArgs[i], vectorArgs[i].c_str());
+    	}
+    	chArgs[vectorArgs.size()] = NULL;
+    	size = vectorArgs.size();
+    	return chArgs;
 }
 
 int main(){
@@ -79,6 +75,7 @@ int main(){
                             }
                             delete [] chArgs;
                             lastCommand = firstBase;
+			    if (lastCommand->isExit()) { break; };
                         }
                         else if (userEntered.at(lastIndex) == ';'){
                             if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 1,(i - (lastIndex+1))); }
@@ -93,6 +90,7 @@ int main(){
                             }
                             delete [] chArgs;
                             lastCommand = indBase;
+                            if (lastCommand->isExit()) { break; };
                         }
                         else if(userEntered.substr(lastIndex,2) == "&&" && lastIndex+1 != i){
                             if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 2))); }
@@ -107,6 +105,7 @@ int main(){
                             }
                             delete [] chArgs;
                             lastCommand = andBase;
+                            if (lastCommand->isExit()) { break; };
                         }
                         else if(userEntered.substr(lastIndex,2) == "||" && lastIndex+1 != i){
                             if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 2))); }
@@ -121,11 +120,14 @@ int main(){
                             }
                             delete [] chArgs;
                             lastCommand = orBase;
+                            if (lastCommand->isExit()) { break; };
                         }
                     }
                 }
                 isFirst = false;
             }
         }
+
 	return 0;
+
 }
