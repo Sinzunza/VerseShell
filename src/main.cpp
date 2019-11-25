@@ -29,12 +29,22 @@ char** createCommand(std::string fragment,int &size){
 	std::string currArg = "";
     	std::stringstream tempStream;
     	tempStream << fragment;
-    	while(tempStream >> currArg){
+    	while (tempStream >> currArg){
+		if (currArg.at(0) == '"'){ //group by quotation mark if found
+			std::string aString;
+			while (tempStream >> aString){
+				currArg = currArg + " " + aString;
+				if (currArg.at(currArg.length()-1 == '"')) {
+					currArg = currArg.substr(1,currArg.length() - 2);
+					break;
+				}
+			}
+		} 
         	vectorArgs.push_back(currArg);
     	}
 
     	char ** chArgs = new char*[vectorArgs.size()+1]; //plus one because add null at end
-    	for(unsigned i = 0; i < vectorArgs.size(); i++){ //alocate new string literal and copy to arr
+    	for (unsigned i = 0; i < vectorArgs.size(); i++){ //alocate new string literal and copy to arr
         	chArgs[i] = new char[vectorArgs[i].size() + 1];
         	strcpy(chArgs[i], vectorArgs[i].c_str());
     	}
