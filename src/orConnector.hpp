@@ -16,7 +16,7 @@ class orConnector : public base {
 			{
 				arguments[i] = args[i];
 			}
-			succeeded = false; 
+			succeeded = true; 
 			exited = false;
 		}       
 		virtual void execute(){	
@@ -37,8 +37,8 @@ class orConnector : public base {
                         			int status;
                         			waitpid(0, &status, WCONTINUED); 
                         			perror("wait for child failed");
-                        			if(status == 0){
-                            				succeeded = true;
+                        			if(status != 0){
+                            				succeeded = false;
                         			}
                     			}
                     			if(pid == 0){
