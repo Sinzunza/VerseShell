@@ -7,8 +7,6 @@
 #include "indConnector.hpp"
 #include "orConnector.hpp"
 #include "andConnector.hpp"
-#include "chainAndConnector.hpp"
-#include "chainOrConnector.hpp"
 
 std::string trim(std::string s) {
 	if (s.length() != 1){
@@ -17,9 +15,6 @@ std::string trim(std::string s) {
         	}
         	while (s.at(s.size()-1) == ' '){
             		s.erase(s.size()-1,1);
-        	}
-        	while (s.at(s.size()-2) == ' '){
-            		s.erase(s.size()-2,1);
         	}
 	}
     return s;
@@ -71,6 +66,7 @@ int main(){
                 userEntered = trim(userEntered);
 
                 std::string currentCommand;
+		bool insideQuotes = false;
                 int lastIndex = 0; 
                 for(unsigned i = 0; i < userEntered.length(); i++){
                     if(userEntered.at(i) == ';' || userEntered.substr(i,2) == "&&" ||userEntered.substr(i,2) == "||" || userEntered.at(i) == '"' || i == userEntered.length()-1){

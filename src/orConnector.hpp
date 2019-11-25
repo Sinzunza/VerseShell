@@ -21,7 +21,7 @@ class orConnector : public base {
 		}       
 		virtual void execute(){	
 			if (!leftBase->isSuccessful()) {
-               			if (strcmp(arguments[0], "exit") == 0){ //check if user wants to exit, before anything
+               			if (strcmp(arguments[0], "exit") == 0){ //check if user wants to exit before anything
                     			exited = true;
                 		}		
                 		else {
