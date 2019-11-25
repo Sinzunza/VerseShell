@@ -20,11 +20,11 @@ base class - Is an abstract class. It has a pure virtual void execute() function
 indConnector class - A sub-class of base. It is a leaf. It is used for objects of the first command or commands that have the ; connecter to the left. 
 This class has no additional members. 
 
-andConnector class - A sub-class of base. It has a base pointer object as a private member. This is therefore a composite. This class is used to create objects of commands that have 
+andConnector class - A sub-class of base. It has a base pointer as a private member. This is therefore a composite. This class is used to create objects of commands that have 
 the && connector to the left. The object it takes in is the object of the command to it's left. In the execute function it checks if the object it is passed in has executed. 
 If so it executes.
 
-orConnector class - A sub-class of base. It has a base pointer object as a private member. This is therefore a composite. This class is used to create objects of commands that have 
+orConnector class - A sub-class of base. It has a base pointer as a private member. This is therefore a composite. This class is used to create objects of commands that have 
 the || connector to the left. The object it takes in is the object of the command to it's left. In the execute function it checks if the object it is passed in has not executed. 
 If not it executes.
 
