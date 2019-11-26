@@ -96,7 +96,7 @@ TEST(testCommandLiteralTests, dFlagDir) {
     EXPECT_EQ(indBase->isSuccessful(), true);
 }
 
-TEST(testSymbolicTests, noFlag) {
+TEST(testCommandSymbolicTests, noFlag) {
     std::string cmd = "[";
     char *charOne = const_cast<char*>(cmd.c_str());
     std::string flag = "names.txt";
@@ -109,7 +109,7 @@ TEST(testSymbolicTests, noFlag) {
     EXPECT_EQ(indBase->isSuccessful(), true);
 }
 
-TEST(testSymbolicTests, eFlagFile) {
+TEST(testCommandSymbolicTests, eFlagFile) {
     std::string cmd = "[";
     char *charOne = const_cast<char*>(cmd.c_str());
     std::string flag = "-e";
@@ -124,7 +124,7 @@ TEST(testSymbolicTests, eFlagFile) {
     EXPECT_EQ(indBase->isSuccessful(), true);
 }
 
-TEST(testSymbolicTests, eFlagDir) {
+TEST(testCommandSymbolicTests, eFlagDir) {
     std::string cmd = "[";
     char *charOne = const_cast<char*>(cmd.c_str());
     std::string flag = "-e";
@@ -139,7 +139,7 @@ TEST(testSymbolicTests, eFlagDir) {
     EXPECT_EQ(indBase->isSuccessful(), true);
 }
 
-TEST(testSymbolicTests, fFlagFile) {
+TEST(testCommandSymbolicTests, fFlagFile) {
     std::string cmd = "[";
     char *charOne = const_cast<char*>(cmd.c_str());
     std::string flag = "-f";
@@ -154,7 +154,7 @@ TEST(testSymbolicTests, fFlagFile) {
     EXPECT_EQ(indBase->isSuccessful(), true);
 }
 
-TEST(testSymbolicTests, fFlagDir) {
+TEST(testCommandSymbolicTests, fFlagDir) {
     std::string cmd = "[";
     char *charOne = const_cast<char*>(cmd.c_str());
     std::string flag = "-f";
@@ -169,7 +169,7 @@ TEST(testSymbolicTests, fFlagDir) {
     EXPECT_EQ(indBase->isSuccessful(), false);
 }
 
-TEST(testSymbolicTests, dFlagFile) {
+TEST(testCommandSymbolicTests, dFlagFile) {
     std::string cmd = "[";
     char *charOne = const_cast<char*>(cmd.c_str());
     std::string flag = "-d";
@@ -184,7 +184,7 @@ TEST(testSymbolicTests, dFlagFile) {
     EXPECT_EQ(indBase->isSuccessful(), false);
 }
 
-TEST(testSymbolicTests, dFlagDir) {
+TEST(testCommandSymbolicTests, dFlagDir) {
     std::string cmd = "[";
     char *charOne = const_cast<char*>(cmd.c_str());
     std::string flag = "-d";
