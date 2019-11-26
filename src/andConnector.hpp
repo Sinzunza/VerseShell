@@ -23,6 +23,12 @@ class andConnector : public base {
                 		if (strcmp(arguments[0], "exit") == 0){ //check if user wants to exit, before anything
                     		exited = true;
                 		}
+				else if (strcmp(arguments[0], "test") == 0 || (strcmp(arguments[0], "[") == 0 && (strcmp(arguments[2], "]") == 0 || strcmp(arguments[3], "]") == 0))) {
+                                    if(strcmp(arguments[0], "test") != 0 && strcmp(arguments[2], "]") == 0){
+                                        arguments[2] = NULL;
+                                    }
+                                    runTest();  
+                                }
                 		else {
                     			pid_t pid = fork();
                     			if (pid < 0){
@@ -35,7 +41,7 @@ class andConnector : public base {
             				else {
                         			int status;
                         			waitpid(0, &status, WCONTINUED); 
-                        			perror("wait for child failed");
+                        			perror("wait for child");
                         			if(status == 0){
                             				succeeded = true;
                         			}

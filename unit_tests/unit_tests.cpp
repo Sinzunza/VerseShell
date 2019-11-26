@@ -3,7 +3,7 @@
 #include "indConnector_tests.hpp"
 #include "orConnector_tests.hpp"
 #include "andConnector_tests.hpp"
-
+#include "testCommand_tests.hpp"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

@@ -75,7 +75,7 @@ TEST(andConnectorTests, using_echo_succeeded_allConnectors) {
     base *andBase = new andConnector(orBase, charArAnd);
     andBase->execute();
 
-    EXPECT_EQ(andBase->isSuccessful(), false);
+    EXPECT_EQ(andBase->isSuccessful(), true);
 }
 
 TEST(andConnectorTests, using_touch) {
