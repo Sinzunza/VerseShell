@@ -26,7 +26,7 @@ TEST(orConnectorTests, using_echo_succeeded) {
     base *orBase = new orConnector(indBase, charAr);
     orBase->execute();
 
-    EXPECT_EQ(orBase->isSuccessful(), false);
+    EXPECT_EQ(orBase->isSuccessful(), true);
 }
 
 TEST(orConnectorTests, using_echo_not_succeeded) {
@@ -74,7 +74,7 @@ TEST(orConnectorTests, using_echo_succeeded_allConnectors) {
     base *orBase = new orConnector(andBase, charAr);
     orBase->execute();
 
-    EXPECT_EQ(orBase->isSuccessful(), false);
+    EXPECT_EQ(orBase->isSuccessful(), true);//since didn't fail. it is considered successful, even though it didn't run. logical operator
 }
 
 TEST(orConnectorTests, using_touch) {
@@ -94,11 +94,11 @@ TEST(orConnectorTests, using_touch) {
    base *orBase = new orConnector(indBase, charAr);
    orBase->execute();
 
-   EXPECT_EQ(orBase->isSuccessful(), false);
+   EXPECT_EQ(orBase->isSuccessful(), true);
 }
 
 TEST(orConnectorTests, using_ls) {
-   std::string cmdOneOr = "ls";
+   std::string cmdOneOr = "lt";
    char *charOneOr = const_cast<char*>(cmdOneOr.c_str());
    char *charArOr[2] = {charOneOr,NULL};
    base *indBase = new indConnector(charArOr);
@@ -110,7 +110,7 @@ TEST(orConnectorTests, using_ls) {
    base *orBase = new orConnector(indBase, charAr);
    orBase->execute();
 
-   EXPECT_EQ(orBase->isSuccessful(), false);
+   EXPECT_EQ(orBase->isSuccessful(), true);
 }
 
 #endif
