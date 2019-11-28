@@ -1,149 +1,36 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <sstream>
-#include <cstring>
+
 #include "base.hpp"
-#include "indConnector.hpp"
-#include "orConnector.hpp"
-#include "andConnector.hpp"
-
-std::string trim(std::string s) {
-	if (s.length() != 1){
-        	while (s.at(0) == ' '){
-            		s.erase(0,1);
-        	}
-        	while (s.at(s.size()-1) == ' '){
-            		s.erase(s.size()-1,1);
-        	}
-	}
-    return s;
-}
-
-char** createCommand(std::string fragment,int &size){
-	fragment = trim(fragment); //remove leading / trailing whitespaces
-    	std::vector <std::string> vectorArgs;
-	std::string currArg = "";
-    	std::stringstream tempStream;
-    	tempStream << fragment;
-    	while (tempStream >> currArg){
-		if (currArg.at(0) == '"'){ //group by quotation mark if found
-			std::string aString;
-			while (tempStream >> aString){
-				currArg = currArg + " " + aString;
-				if (currArg.at(currArg.length()-1) == '"') {
-					currArg = currArg.substr(1,currArg.length() - 2);
-					break;
-				}
-			}
-		}	
-		vectorArgs.push_back(currArg);
-    	}
-
-    	char ** chArgs = new char*[vectorArgs.size()+1]; //plus one because add null at end
-    	for (unsigned i = 0; i < vectorArgs.size(); i++){ //allocate new string literal and copy to arr
-        	chArgs[i] = new char[vectorArgs[i].size() + 1];
-        	strcpy(chArgs[i], vectorArgs[i].c_str());
-    	}
-        chArgs[vectorArgs.size()] = NULL;
-    	size = vectorArgs.size();
-    	return chArgs;
-}
+#include "parse.h"
 
 int main(){
-        bool isFirst = true;
         base *lastCommand;
-        while(isFirst || !lastCommand->isExit()){
+        bool isFirst = true;
+        bool exited = false;
+        while(isFirst || !exited)
+        {
+            isFirst = false;
             std::cout << "\n$ ";
-            std::string userEntered = ""; //echo hello world; touch hello.txt && ls; mrkir newFolder || mkdir truefolder
+            std::string userEntered = "";
             getline(std::cin,userEntered);
             
-            if(!userEntered.empty()) {
-                std::size_t found = userEntered.find('#'); //if comment found trim anything after comment
-                if (found!=std::string::npos){
-                    userEntered = userEntered.substr(0,found);
-                }
-                userEntered = trim(userEntered);
-
-                std::string currentCommand;
-		bool insideQuotes = false;
-                int lastIndex = 0; 
-                for(unsigned i = 0; i < userEntered.length(); i++){
-                    if(userEntered.at(i) == ';' || userEntered.substr(i,2) == "&&" ||userEntered.substr(i,2) == "||" || userEntered.at(i) == '"' || i == userEntered.length()-1){
-                         if(userEntered.at(i) == '"'){
-                                if(!insideQuotes){
-                                        insideQuotes = true;
-                                }
-                                else {
-                                        insideQuotes = false;
-                                }
-                        }
-			if (lastIndex == 0 && !insideQuotes){ //first command
-                            if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex,i); }
-                            else { currentCommand = userEntered.substr(lastIndex,i+1); }
-                            lastIndex = i;
-                            int size;
-                            char ** chArgs = createCommand(currentCommand,size);
-                            base *firstBase = new indConnector(chArgs);
-                            firstBase->execute();
-                            for(unsigned j = 0; j < size; j++){
-                                delete [] chArgs[j];
-                            }
-                            delete [] chArgs;
-                            lastCommand = firstBase;
-			    if (lastCommand->isExit()) { break; };
-                        }
-                        else if (userEntered.at(lastIndex) == ';' && !insideQuotes ){
-                            if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 1,(i - (lastIndex+1))); }
-                            else { currentCommand = userEntered.substr(lastIndex + 1,(i - (lastIndex))); }
-                            lastIndex = i;
-                            int size;
-                            char ** chArgs = createCommand(currentCommand,size);
-                            base *indBase = new indConnector(chArgs);
-                            indBase->execute();
-                            for(unsigned j = 0; j < size; j++){
-                                delete [] chArgs[j];
-                            }
-                            delete [] chArgs;
-                            lastCommand = indBase;
-                            if (lastCommand->isExit()) { break; };
-                        }
-                        else if(userEntered.substr(lastIndex,2) == "&&" && !insideQuotes && lastIndex+1 != i){
-                            if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 2))); }
-                            else { currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 1))); }
-			    lastIndex = i;
-                            int size;
-                            char ** chArgs = createCommand(currentCommand,size);
-                            base *andBase = new andConnector(lastCommand, chArgs);
-                            andBase->execute();
-                            for(unsigned j = 0; j < size; j++){
-                               delete [] chArgs[j];
-                            }
-                            delete [] chArgs;
-                            lastCommand = andBase;
-                            if (lastCommand->isExit()) { break; } 
-                        }
-                        else if(userEntered.substr(lastIndex,2) == "||" && !insideQuotes &&  lastIndex+1 != i){
-                            if(i != userEntered.length()-1){ currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 2))); }
-                            else { currentCommand = userEntered.substr(lastIndex + 2,(i - (lastIndex + 1))); }
-		 	    lastIndex = i;
-			    int size;
-                            char ** chArgs = createCommand(currentCommand,size);
-                            base *orBase = new orConnector(lastCommand, chArgs);
-                            orBase->execute();
-                            for(unsigned j = 0; j < size; j++){
-                                delete [] chArgs[j];
-                            }
-                            delete [] chArgs;
-                            lastCommand = orBase;
-                            if (lastCommand->isExit()) { break; };
-			}
+            if(!userEntered.empty())
+            {
+                int iterator = 0;
+                int lastIndex = 0;
+                std::vector <base*> allCommands;
+                allCommands =  parse::parseString(lastCommand, userEntered, iterator, lastIndex);
+                for (int i = 0; i < allCommands.size(); i++) {
+                    allCommands.at(i)->execute();
+                    if (allCommands.at(i)->isExit()){
+                        exited = true;
+                        break;
                     }
-                }
-                isFirst = false;
+                }  
             }
         }
 
 	return 0;
-
 }
