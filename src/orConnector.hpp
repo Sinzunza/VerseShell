@@ -35,7 +35,7 @@ class orConnector : public base {
                                     	{
                                         	arguments[2] = NULL;
                                     	}
-                                    	runTest();  
+                                    	executeTest();  
                         	}
                 		else {
                     			pid_t pid = fork();
