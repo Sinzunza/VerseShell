@@ -8,8 +8,7 @@
 #include <errno.h>
 
 class orConnector : public base {
-	public: 
-		
+	public: 	
 		orConnector(base *leftBase, std::string aCommand) : base()
         	{
 			this->leftBase = leftBase;
