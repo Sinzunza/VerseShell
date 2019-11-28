@@ -65,7 +65,7 @@ class base
                     return chArgs;
                 }
     
-                void execTest()
+                void executeTest()
                 {
                             struct stat tempStat;
                             if (strcmp(arguments[1], "-e") == 0 || arguments[2] == NULL)
