@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "base.hpp"
-#include "parse.h"
+#include "../headers/parse.h"
 
 int main(){
         base *lastCommand;
