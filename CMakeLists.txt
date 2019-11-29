@@ -7,6 +7,10 @@ SET(CMAKE_CXX_STANDARD 11)
 
 ADD_EXECUTABLE(rshell
         src/main.cpp
+	src/parse.cpp
+	src/indParen.cpp
+	src/andParen.cpp
+	src/orParen.cpp
 )
 
 ADD_EXECUTABLE(test

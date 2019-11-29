@@ -1,4 +1,4 @@
-#include "parse.h"
+#include "../headers/parse.h"
 
 std::vector <base*> parse::parseString(base* lastCommand, std::string userEntered, int &i, int &lastIndex)
 {

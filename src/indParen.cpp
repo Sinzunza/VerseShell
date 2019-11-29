@@ -1,4 +1,4 @@
-#include "indParen.h"
+#include "../headers/indParen.h"
 
 indParen::indParen(std::string command, int &iterator, int &lastIndex) : base() 
 {

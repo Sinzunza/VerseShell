@@ -1,4 +1,4 @@
-#include "orParen.h"
+#include "../headers/orParen.h"
 
 orParen::orParen(base* leftBase, std::string command, int &iterator, int &lastIndex) : base() 
 {

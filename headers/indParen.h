@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <errno.h>
 
-#include "base.hpp"
+#include "../src/base.hpp"
 #include "parse.h"
 
 class parse;
