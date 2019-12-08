@@ -1,4 +1,4 @@
-#include "../headers/andParen.h"
+#include "../header/andParen.h"
 
 andParen::andParen(base* leftBase, std::string command, int &iterator, int &lastIndex) : base() 
 {
