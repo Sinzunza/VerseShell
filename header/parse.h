@@ -10,9 +10,9 @@
 #include "../src/indConnector.hpp"
 #include "../src/orConnector.hpp"
 #include "../src/andConnector.hpp"
-#include "../header/indParen.h"
-#include "../header/andParen.h"
-#include "../header/orParen.h"
+#include "indParen.h"
+#include "andParen.h"
+#include "orParen.h"
 
 class indParen;
 class andParen;
