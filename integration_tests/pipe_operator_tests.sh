@@ -21,3 +21,14 @@ cat < ls | tr a-z A-Z > r.out
 rm r.out
 exit
 EOL
+
+echo "Performing compatability tests"
+../rshell << EOL
+cat < ../names.txt | tr a-z A-Z && cat < ../names.txt | tr A-Z a-z
+exit
+EOL
+
+../rshell << EOL
+cat < ../names.txt | tr a-z A-Z || cat < ../names.txt | tr A-Z a-z
+exit
+EOL
