@@ -7,7 +7,7 @@ Garrett Pedvin, 862085838, gpedv002@ucr.edu
 
 ### Introduction
 This program is a command shell which is able to Print a command prompt (e.g. `$`). Read in a line of command(s) (and connector(s)) from standard input. And execute the appropriate 
-commands using fork , execvp , and waitpid commands. We are using the composite pattern design for representing the commands and connecters. The inputs are ingested through the getline() function and then through iteration of the the string inputs are seperated and transformed into objects for each command, based on the previous connector (if applicable). Each object has an execute() function that will run the command stored within the object, as well as a createCommand function that transforms the stored string into a given argument list. RShell supports commented code, argument lists enclosed in quotations, operators including and (&&) and or (||), I/O redirection and piping as well as an inbuilt test command (using either the *test* command or using square brackets) and precedence (e.g. parenthesis)
+commands using fork , execvp , and waitpid commands. We are using the composite pattern design for representing the commands and connecters. The inputs are ingested through the getline() function and then through iteration of the the string inputs are seperated and transformed into objects for each command, based on the previous connector (if applicable). Each object has an execute() function that will run the command stored within the object, as well as a createCommand function that transforms the stored string into a given argument list. RShell supports commented code, argument lists enclosed in quotations, operators including and (&&) and or (||), I/O redirection as well as an inbuilt test command (using either the *test* command or using square brackets) and precedence (e.g. parenthesis)
 
 ### Classes
 We have a group of classes in the form of the composite pattern.
@@ -21,12 +21,6 @@ orConnector - Subclass of base. Signifies that the previous connector was an or 
 andConnector - Subclass of base. Signifies that the previous connector was an and connector, and thus the command object will not call execvp() if the previous command failed. Contains a constructor and an implementation of execute().
 
 indParen, orParen, andParen - Wrapper classes of their respective connectors. Allows for precedence operations. Simply re-parses the string recursively in order to execute them in order of priority.
-
-inRedir - Subclass of base. When execute() is called, instead of executing, simply changes the fd 0 (stdin) to a given file. Throws an error if this file is missing.
-
-outSingle and outDouble - Subclass of base. When execute() is called, instead of executing a command, simply changes the fd 1 (stdout) to a given file. The difference between the two files is that, if outDouble finds that the specified output file exists already, it will append the output to the file instead of replacing it fully.
-
-piping - Subclass of base. Signifies that there is a pipe connector, and links the previous and next command in the vector list to allow them to communicate.
 
 **Other/Miscellaneous Classes:**
 
@@ -44,4 +38,4 @@ There are three different types of connectors we will be using. The semicolon (;
 
 ### Known Bugs
 - The symbolic representation for the *test* command as well as the precedence operators only function properly when a space exists between the symbol and the next character in the argument. (e.g.: ( echo hello ) works, but (echo hello) does not).
-- The inRedir, outSingle, outDouble, and piping classes are mysteriously empty.
+- I'm sorry Mario, but your pipe is in another castle.
