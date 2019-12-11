@@ -6,3 +6,13 @@ echo "Beginning test input redirection tests"
 cat < ../names.txt
 exit
 EOL
+
+../rshell << EOL
+cat < ../names.txt || cat < ../README.md
+exit
+EOL
+
+../rshell << EOL
+cat < ../names.txt && cat < ..names.txt
+exit
+EOL
