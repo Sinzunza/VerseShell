@@ -26,6 +26,7 @@ EOL
 ../rshell << EOL
 echo "This is a single line I am outputting via a file," < r.out
 echo "But this other line came along to ruin your fun!" << r.out
+test r.out
 ./r.out
 rm r.out
 EOL
