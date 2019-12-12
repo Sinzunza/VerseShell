@@ -13,6 +13,6 @@ exit
 EOL
 
 ../rshell << EOL
-cat < ../names.txt && cat < ..names.txt
+cat < ../names.txt && cat < ../names.txt
 exit
 EOL

@@ -2,31 +2,25 @@
 
 echo "Beginning output redirection tests"
 
-echo "Testing single outputs"
+echo "Testing single output"
 ../rshell << EOL
-echo Hello < r.out
-./r.out
-rm r.out
-EOL 
-
-../rshell << EOL
-echo "This is a single line I am outputting via a file!" < r.out
-./r.out
-rm r.out
+touch  aFile.txt
+echo "Hello World" > aFile.txt
+cat aFile.txt
+exit
 EOL
 
-echo "Testing append outputs"
-../rshell << EOL
-echo Hello < r.out
-echo World << r.out
-./r.out
-rm r.out
+echo "Testing single output override"
+../rshell << EOL 
+echo "This input should be the first one in the file " > aFile.txt
+cat aFile.txt
+exit
 EOL
 
+echo "Testing single output append"
 ../rshell << EOL
-echo "This is a single line I am outputting via a file," < r.out
-echo "But this other line came along to ruin your fun!" << r.out
-test r.out
-./r.out
-rm r.out
+echo "This input should be appended to existing input " >> aFile.txt
+cat aFile.txt
+rm aFile.txt
+exit
 EOL
