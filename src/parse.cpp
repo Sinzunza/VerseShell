@@ -13,7 +13,7 @@ std::vector <base*> parse::parseString(base* lastCommand, std::string userEntere
                 std::vector <base*> allCommands;
                 for (i; i < userEntered.length(); i++)
                 {
-                    if(userEntered.at(i) == ';' || userEntered.substr(i,2) == "&&" ||userEntered.substr(i,2) == "||" || userEntered.at(i) == '"' ||                                              userEntered.at(i) == '(' || userEntered.at(i) == ')' || i == userEntered.length()-1)
+                    if(userEntered.at(i) == ';' || userEntered.substr(i,2) == "&&" ||userEntered.substr(i,2) == "||" || userEntered.at(i) == '"' || userEntered.at(i) == '(' || userEntered.at(i) == ')' || i == userEntered.length()-1)
                     {
                         if(userEntered.at(lastIndex) == ')'){
                             lastIndex = i;
