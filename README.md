@@ -4,7 +4,6 @@ Sergio Inzunza, sinzu003@ucr.edu
 Garrett Pedvin, gpedv002@ucr.edu
 
  ### Installation
----------
 Open the terminal and run these commands:
 ```
 1. git clone --recursive https://github.com/Sinzunza93/RShell.git
