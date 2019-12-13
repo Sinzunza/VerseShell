@@ -8,8 +8,9 @@ Open the terminal and run these commands:
 ```
 1. git clone --recursive https://github.com/Sinzunza93/RShell.git
 2. cd RShell
-3. make
-4. ./RShell
+3. cmake .
+4. make
+5. ./RShell
 ```
 
 ### Introduction
