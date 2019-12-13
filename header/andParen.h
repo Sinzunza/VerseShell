@@ -12,12 +12,12 @@
 class parse;
 
 class andParen : public base {
-        public:
-            andParen(base* leftBase, std::string command, int &iterator, int &lastIndex);
-            virtual void execute();
-    
-        private:
-            base* leftBase;
-            std::vector <base*> allBases;
+    public:
+        andParen(base* leftBase, std::string command, int &iterator, int &lastIndex);
+        virtual void execute();
+
+    private:
+        base* leftBase;
+        std::vector <base*> allBases;
 };
 #endif

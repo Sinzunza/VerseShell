@@ -12,11 +12,11 @@
 class parse;
 
 class indParen : public base {
-        public:
-            indParen(std::string command, int &iterator, int &lastIndex);
-            virtual void execute();
-    
-        private:
-            std::vector <base*> allBases;
+    public:
+        indParen(std::string command, int &iterator, int &lastIndex);
+        virtual void execute();
+
+    private:
+        std::vector <base*> allBases;
 };
 #endif

@@ -12,12 +12,12 @@
 class parse;
 
 class orParen : public base {
-        public:
-            orParen(base* leftBase, std::string command, int &iterator, int &lastIndex);
-            virtual void execute();
-    
-        private:
-            base *leftBase;
-            std::vector <base*> allBases;
+    public:
+        orParen(base* leftBase, std::string command, int &iterator, int &lastIndex);
+        virtual void execute();
+
+    private:
+        base *leftBase;
+        std::vector <base*> allBases;
 };
 #endif

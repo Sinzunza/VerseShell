@@ -20,7 +20,7 @@ class orParen;
 
 class parse {
     public:
-    
         static std::vector <base*> parseString(base* lastCommand, std::string userEntered, int &i, int &lastIndex);
+
 };
 #endif
