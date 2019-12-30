@@ -1,7 +1,7 @@
 # RShell
 
-Sergio Inzunza, sinzu003@ucr.edu
-Garrett Pedvin, gpedv002@ucr.edu
+Sergio Inzunza,
+Garrett Pedvin
 
  ### Installation
 Open the terminal and run these commands:
