@@ -1,7 +1,7 @@
 # RShell
 
 Sergio Inzunza
-\nGarrett Pedvin
+\Garrett Pedvin
 
  ### Installation
 Open the terminal and run these commands:
