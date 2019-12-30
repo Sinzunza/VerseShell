@@ -1,6 +1,6 @@
 # RShell
 
-Sergio Inzunza  
+Sergio Inzunza,   
 Garrett Pedvin
 
  ### Installation
