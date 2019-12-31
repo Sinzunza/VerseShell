@@ -45,3 +45,6 @@ There are three different types of connectors we will be using. The semicolon (;
 
 ### Known Bugs
 - The symbolic representation for the *test* command as well as the precedence operators only function properly when a space exists between the symbol and the next character in the argument. (e.g.: ( echo hello ) works, but (echo hello) does not).
+
+
+11/2019
