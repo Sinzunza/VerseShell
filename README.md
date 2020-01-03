@@ -43,7 +43,7 @@ Parsing the input from the user can be easily subdivided into different tasks co
 
 There are three different types of connectors we will be using. The semicolon (;) connector ensures that commands run in a proper sequence; when this connector is reached, all commands before it will be executed. The and (&&) connector enforces that commands areran until an unsuccessful execution is made, and the or (||) processor will run commands only up to the first one that is completed successfully. We will have classes differentiating how And and Or connectors work, while semicolon connectors will automatically be built into the input parser.
 
-### Known Bugs
+### Known Bugs 
 - The symbolic representation for the *test* command as well as the precedence operators only function properly when a space exists between the symbol and the next character in the argument. (e.g.: ( echo hello ) works, but (echo hello) does not).
 
 
