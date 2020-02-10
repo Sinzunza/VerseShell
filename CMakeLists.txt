@@ -5,7 +5,7 @@ ADD_SUBDIRECTORY(googletest)
 SET(CMAKE_CXX_STANDARD 11)
 
 
-ADD_EXECUTABLE(RShell
+ADD_EXECUTABLE(VerseShell
         src/main.cpp
 	src/parse.cpp
 	src/indParen.cpp
