@@ -2,7 +2,7 @@
 
 echo "Beginning commented command tests"
 echo "Testing commands in order: echo hello world \#, echo hello \# world, echo \# hello world"
-../rshell << EOL
+../VerseShell << EOL
 echo hello world #
 echo hello # world
 echo # hello world   
