@@ -1,4 +1,4 @@
-# RShell
+# VerseShell
 
 Sergio Inzunza,   
 Garrett Pedvin
