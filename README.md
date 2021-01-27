@@ -10,11 +10,6 @@ git clone https://github.com/Sinzunza93/VerseShell.git
 cd VerseShell
 cmake . 
 make
-```
-
-### Usage
-To run the program type the following command
-```
 ./VerseShell
 ```
 
