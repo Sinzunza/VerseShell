@@ -6,7 +6,7 @@ Garrett Pedvin
  ### Installation
 Open the terminal and run these commands:
 ```
-git clone --recursive https://github.com/Sinzunza93/VerseShell.git
+git clone https://github.com/Sinzunza93/VerseShell.git
 cd VerseShell
 cmake . 
 make
