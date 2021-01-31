@@ -34,7 +34,7 @@ indParen, orParen, andParen - Wrapper classes of their respective connectors. Al
 parse - Helper class for main in order to digest and transform user input.
 
 ### Diagram
-![OMT Diagram](https://github.com/Sinzunza93/VerseShell/blob/master/images/OMT%20Diagram.jpeg)
+![OMT Diagram](https://github.com/Sinzunza/VerseShell/blob/master/images/OMT%20Diagram.jpeg)
 
 ### Prototypes/Research
 The **waitpid()**, **execvp()**, and **fork()** commands are how our program is able to address and execute commands. **fork()** creates a child process that is duplicate of the current, parent process, but exists with a process id of 0, so it can be distinguished and sent off to do other tasks with the **execvp()** command. The **execvp()** command allows us to choose a command as well as a character array of arguments and essentially send them to the command line. Meanwhile, the parent process calls **waitpid()**, enabling it to monitor for the child task's completion before returning back to regular code execution. These three functions will be used mainly in the class that handles the command requests themselves.
