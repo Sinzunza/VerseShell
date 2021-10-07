@@ -1,7 +1,6 @@
 #include "../header/andParen.h"
 
-andParen::andParen(base* leftBase, std::string command, int &iterator, int &lastIndex) : base()
-{
+andParen::andParen(base* leftBase, std::string command, int &iterator, int &lastIndex) : base() {
     this->leftBase = leftBase;
     this->command = command;
     succeeded = false;
@@ -9,16 +8,14 @@ andParen::andParen(base* leftBase, std::string command, int &iterator, int &last
     allBases = parse::parseString(leftBase, command, iterator, lastIndex);
 }
 
-void andParen::execute()
-{
+void andParen::execute() {
 
-    if (leftBase->isSuccessful())
-    {
-        for (int i = 0; i < allBases.size(); i++)
-        {
+    if (leftBase->isSuccessful()) {
+
+        for (int i = 0; i < allBases.size(); i++) {
             allBases.at(i)->execute();
-            if(allBases.at(i)->isExit())
-            {
+
+            if(allBases.at(i)->isExit()) {
                 exited = true;
                 break;
             }
@@ -26,5 +23,4 @@ void andParen::execute()
 
         succeeded = allBases.back()->isSuccessful();
     }
-
 }
