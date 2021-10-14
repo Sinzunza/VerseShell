@@ -66,7 +66,7 @@ class indConnector : public base {
 
                                 if(command.substr(i,2) == ">>") {
                                     fileName = command.substr(i+2);
-                                    std::stringstream theStream;
+                                    std::stringstream theStream; // stringstream used to pull first word from fileName, in case we have more commands after
                                     theStream << fileName;
                                     theStream >> fileName;
                                     command = command.substr(0,i);
