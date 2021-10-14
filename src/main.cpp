@@ -7,12 +7,10 @@
 
 int main(){
 
-    bool isFirst = true;
     bool exited = false;
     char currentDir[256];
 
-    while(isFirst || !exited) {
-        isFirst = false;
+    while(!exited) {
         getcwd(currentDir, 256);
         std::cout << currentDir << "$ ";
         std::string userEntered = "";
