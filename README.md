@@ -17,12 +17,16 @@ make
 This program is a unix command shell which is able to Print a command prompt (e.g. `$`). Read in a line of command(s) (and connector(s)) from standard input. And execute the appropriate commands using fork , execvp , and waitpid commands. We are using the composite pattern design for representing the commands and connecters. The inputs are ingested through the getline() function and then through iteration of the the string inputs are seperated and transformed into objects for each command, based on the previous connector (if applicable). Each object has an execute() function that will run the command stored within the object, as well as a createCommand function that transforms the stored string into a given argument list. VerseShell supports commented code, argument lists enclosed in quotations, operators including and (&&) and or (||), I/O redirection as well as an inbuilt test command (using either the *test* command or using square brackets) and precedence (e.g. parenthesis).
 
 **example commands:** \
-ls && clear \
-ls || clear \
-ls && (pwd || clear) \
-ls ; clear \
-echo Hello > message.txt \
+```
+ls && clear
+ls || clear
+ls && (pwd || clear)
+ls ; clear
+echo Overwriting > message.txt
+echo Appending >> message.txt
+cat < message.txt
 test -e images
+```
 
 ### Classes
 We have a group of classes in the form of the composite pattern.
